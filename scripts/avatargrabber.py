@@ -1,6 +1,7 @@
 from ts3plugin import ts3plugin
 import ts3, ts3defines, os.path, binascii, re, shutil
 from base64 import b64encode
+from os import path
 from PythonQt.QtGui import QFileDialog
 from PythonQt.QtCore import Qt
 
