@@ -1,5 +1,6 @@
+import ts3lib as ts3
 from ts3plugin import ts3plugin
-import ts3, ts3defines, os.path, binascii, re, shutil
+import ts3defines, os.path, binascii, re, shutil
 from base64 import b64encode
 from os import path
 from PythonQt.QtGui import QFileDialog
@@ -16,7 +17,7 @@ class Avatargrabber(ts3plugin):
     commandKeyword = ""
     infoTitle = None
     hotkeys = []
-    menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 0, "Grab avatar", "scripts/avatargrabber/logo.png")]
+    menuItems = [(ts3defines.PluginMenuType.PLUGIN_MENU_TYPE_CLIENT, 0, "Grab avatar", "scripts/avatargrabber/img/logo.png")]
     destination = None
 
     def __init__(self):
@@ -66,6 +67,7 @@ class Avatargrabber(ts3plugin):
         directory = self.get_avatarpath(schid, clientuid)
         if directory:
             (error, nickname) = ts3.getClientVariableAsString(schid, clientuid, ts3defines.ClientProperties.CLIENT_NICKNAME)
+            nickname = re.sub('[^a-zA-Z0-9\n\.]', '', nickname)
             SaveFileDialog(self, nickname)
             if self.destination != "": shutil.copy2(directory, self.destination)
 
